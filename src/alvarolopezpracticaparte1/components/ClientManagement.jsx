@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-export default function ClientManagement({ clientes, onEditarCliente, onEliminarCliente }) {
+export default function ClientManagement({clientes, onEditarCliente, onEliminarCliente}) {
     const [modoEdicion, setModoEdicion] = useState(null);
     const [clienteEditado, setClienteEditado] = useState({});
 
@@ -10,8 +10,8 @@ export default function ClientManagement({ clientes, onEditarCliente, onEliminar
     };
 
     const manejarCambio = (e) => {
-        const { name, value } = e.target;
-        setClienteEditado({ ...clienteEditado, [name]: value });
+        const {name, value} = e.target;
+        setClienteEditado({...clienteEditado, [name]: value});
     };
 
     const guardarEdicion = () => {
@@ -63,83 +63,95 @@ export default function ClientManagement({ clientes, onEditarCliente, onEliminar
     };
 
     return (
-        <table style={styles.table}>
-            <thead>
-            <tr>
-                <th style={styles.th}>Nombre</th>
-                <th style={styles.th}>Email</th>
-                <th style={styles.th}>Teléfono</th>
-                <th style={styles.th}>Acciones</th>
-            </tr>
-            </thead>
-            <tbody>
-            {clientes.map((cliente) => (
-                <tr key={cliente.id}>
-                    {modoEdicion === cliente.id ? (
-                        <>
-                            <td style={styles.td}>
-                                <input
-                                    type="text"
-                                    name="nombre"
-                                    value={clienteEditado.nombre}
-                                    onChange={manejarCambio}
-                                />
-                            </td>
-                            <td style={styles.td}>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={clienteEditado.email}
-                                    onChange={manejarCambio}
-                                />
-                            </td>
-                            <td style={styles.td}>
-                                <input
-                                    type="text"
-                                    name="telefono"
-                                    value={clienteEditado.telefono}
-                                    onChange={manejarCambio}
-                                />
-                            </td>
-                            <td style={styles.td}>
-                                <button
-                                    onClick={guardarEdicion}
-                                    style={{ ...styles.button, ...styles.saveButton }}
-                                >
-                                    Guardar
-                                </button>
-                                <button
-                                    onClick={() => setModoEdicion(null)}
-                                    style={{ ...styles.button, ...styles.cancelButton }}
-                                >
-                                    Cancelar
-                                </button>
-                            </td>
-                        </>
-                    ) : (
-                        <>
-                            <td style={styles.td}>{cliente.nombre}</td>
-                            <td style={styles.td}>{cliente.email}</td>
-                            <td style={styles.td}>{cliente.telefono}</td>
-                            <td style={styles.td}>
-                                <button
-                                    onClick={() => iniciarEdicion(cliente)}
-                                    style={{ ...styles.button, ...styles.editButton }}
-                                >
-                                    Editar
-                                </button>
-                                <button
-                                    onClick={() => onEliminarCliente(cliente.id)}
-                                    style={{ ...styles.button, ...styles.deleteButton }}
-                                >
-                                    Eliminar
-                                </button>
-                            </td>
-                        </>
-                    )}
+        <>
+            <h1 style={{
+                marginLeft: "10px",
+                fontFamily: "sans-serif",
+            }}>Lista de Clientes</h1>
+            <table style={{
+                ...styles.table,
+                width: "99%",
+                marginLeft: "10px",
+            }}>
+                <thead>
+                <tr>
+                    <th style={styles.th}>Nombre</th>
+                    <th style={styles.th}>Email</th>
+                    <th style={styles.th}>Teléfono</th>
+                    <th style={styles.th}>Acciones</th>
                 </tr>
-            ))}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+
+                {clientes.map((cliente) => (
+                    <tr key={cliente.id}>
+                        {modoEdicion === cliente.id ? (
+                            <>
+                                <td style={styles.td}>
+                                    <input
+                                        type="text"
+                                        name="nombre"
+                                        value={clienteEditado.nombre}
+                                        onChange={manejarCambio}
+                                    />
+                                </td>
+                                <td style={styles.td}>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={clienteEditado.email}
+                                        onChange={manejarCambio}
+                                    />
+                                </td>
+                                <td style={styles.td}>
+                                    <input
+                                        type="text"
+                                        name="telefono"
+                                        value={clienteEditado.telefono}
+                                        onChange={manejarCambio}
+                                    />
+                                </td>
+                                <td style={styles.td}>
+                                    <button
+                                        onClick={guardarEdicion}
+                                        style={{...styles.button, ...styles.saveButton}}
+                                    >
+                                        Guardar
+                                    </button>
+                                    <button
+                                        onClick={() => setModoEdicion(null)}
+                                        style={{...styles.button, ...styles.cancelButton}}
+                                    >
+                                        Cancelar
+                                    </button>
+                                </td>
+                            </>
+                        ) : (
+                            <>
+                                <td style={styles.td}>{cliente.nombre}</td>
+                                <td style={styles.td}>{cliente.email}</td>
+                                <td style={styles.td}>{cliente.telefono}</td>
+                                <td style={styles.td}>
+                                    <button
+                                        onClick={() => iniciarEdicion(cliente)}
+                                        style={{...styles.button, ...styles.editButton}}
+                                    >
+                                        Editar
+                                    </button>
+                                    <button
+                                        onClick={() => onEliminarCliente(cliente.id)}
+                                        style={{...styles.button, ...styles.deleteButton}}
+                                    >
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </>
+                        )}
+                    </tr>
+                ))}
+
+                </tbody>
+            </table>
+        </>
     );
 }

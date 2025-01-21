@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-export default function AddClient({ onAgregarCliente }) {
+export default function AddClient({onAgregarCliente}) {
     const [nombre, setNombre] = useState("");
     const [email, setEmail] = useState("");
     const [telefono, setTelefono] = useState("");
@@ -27,33 +27,41 @@ export default function AddClient({ onAgregarCliente }) {
             return;
         }
 
-        onAgregarCliente({ nombre, email, telefono });
+        onAgregarCliente({nombre, email, telefono});
         setNombre("");
         setEmail("");
         setTelefono("");
     };
 
     return (
-        <form onSubmit={manejarSubmit}>
-            <input
-                type="text"
-                placeholder="Nombre"
-                value={nombre}
-                onChange={(e) => setNombre(e.target.value)}
-            />
-            <input
-                type="email"
-                placeholder="Correo electrónico"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                type="text"
-                placeholder="Teléfono"
-                value={telefono}
-                onChange={(e) => setTelefono(e.target.value)}
-            />
-            <button type="submit">Añadir Cliente</button>
-        </form>
+        <>
+            <h1 style={{
+                marginLeft: "10px",
+                fontFamily: "sans-serif"
+            }}>Añadir Cliente</h1>
+            <form onSubmit={manejarSubmit} style={{
+                marginLeft: "10px"
+            }}>
+                <input
+                    type="text"
+                    placeholder="Nombre"
+                    value={nombre}
+                    onChange={(e) => setNombre(e.target.value)}
+                />
+                <input
+                    type="email"
+                    placeholder="Correo electrónico"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <input
+                    type="text"
+                    placeholder="Teléfono"
+                    value={telefono}
+                    onChange={(e) => setTelefono(e.target.value)}
+                />
+                <button type="submit">Añadir Cliente</button>
+            </form>
+        </>
     );
 }
